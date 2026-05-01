@@ -37,8 +37,9 @@
       --radius: 16px;
       --radius-sm: 10px;
       --font: 'Inter', system-ui, sans-serif;
-      --chat-h: 570px;
-      --page-w: 1200px;
+      --chat-h: 650px;
+      --page-w: 1180px;
+      --faq-w: clamp(420px, 36vw, 460px);
       --header-h: 62px;
       --shadow-card:
         0 12px 36px rgba(0, 0, 0, 0.30),
@@ -77,7 +78,8 @@
     .bg-orb {
       position: absolute;
       border-radius: 999px;
-      background: rgba(255, 90, 95, 0.06);
+      background: linear-gradient(135deg, rgba(255, 90, 95, 0.18), rgba(255, 130, 135, 0.045));
+      box-shadow: 0 0 22px rgba(255, 90, 95, 0.08);
       filter: blur(0.2px);
     }
 
@@ -86,7 +88,7 @@
       height: 18px;
       top: 110px;
       left: 74px;
-      opacity: 0.65;
+      opacity: 0.76;
     }
 
     .bg-orb.orb-2 {
@@ -94,7 +96,7 @@
       height: 10px;
       top: 142px;
       left: 103px;
-      opacity: 0.35;
+      opacity: 0.52;
     }
 
     .bg-orb.orb-3 {
@@ -102,7 +104,7 @@
       height: 7px;
       top: 126px;
       left: 128px;
-      opacity: 0.28;
+      opacity: 0.42;
     }
 
     .bg-orb.orb-4 {
@@ -110,7 +112,7 @@
       height: 16px;
       right: 92px;
       top: 96px;
-      opacity: 0.18;
+      opacity: 0.32;
     }
 
     .bg-orb.orb-5 {
@@ -118,7 +120,7 @@
       height: 9px;
       right: 70px;
       top: 121px;
-      opacity: 0.10;
+      opacity: 0.24;
     }
 
     .bg-orb.orb-6 {
@@ -126,7 +128,23 @@
       height: 12px;
       right: 120px;
       bottom: 74px;
-      opacity: 0.14;
+      opacity: 0.28;
+    }
+
+    .bg-orb.orb-7 {
+      width: 8px;
+      height: 8px;
+      right: 180px;
+      bottom: 150px;
+      opacity: 0.24;
+    }
+
+    .bg-orb.orb-8 {
+      width: 6px;
+      height: 6px;
+      left: 22px;
+      bottom: 66px;
+      opacity: 0.18;
     }
 
     #app {
@@ -376,13 +394,14 @@
 
     main {
       flex: 1;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 30px 20px 20px;
-      gap: 20px;
+      padding: 30px clamp(20px, 4vw, 48px) 20px;
+      gap: 22px;
     }
 
     main::-webkit-scrollbar {
@@ -396,9 +415,10 @@
 
     .hero {
       text-align: center;
-      max-width: var(--page-w);
       width: 100%;
-      animation: fadeUp 0.55s ease both;
+      max-width: var(--page-w);
+      margin-inline: auto;
+      animation: fadeUp 0.45s ease both;
     }
 
     .hero-badge {
@@ -438,9 +458,10 @@
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      max-width: var(--page-w);
       width: 100%;
-      animation: fadeUp 0.62s ease both;
+      max-width: var(--page-w);
+      margin-inline: auto;
+      animation: fadeUp 0.45s ease both;
     }
 
     .pill {
@@ -484,14 +505,17 @@
     .support-grid {
       width: 100%;
       max-width: var(--page-w);
+      margin-inline: auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.24fr) minmax(340px, 0.76fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) var(--faq-w);
+      gap: 22px;
       align-items: stretch;
+      justify-content: center;
     }
 
     .chat-wrap,
     .faq-wrap {
+      min-width: 0;
       border-radius: var(--radius);
       overflow: hidden;
       background:
@@ -499,31 +523,51 @@
         var(--surface1);
       border: 1px solid rgba(255,255,255,0.05);
       box-shadow: var(--shadow-card);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(6px);
     }
 
     .chat-wrap {
       height: var(--chat-h);
+      width: 100%;
       display: flex;
       flex-direction: column;
       animation: fadeUp 0.7s ease both;
+      justify-self: center;
     }
 
     .faq-wrap {
       height: var(--chat-h);
+      width: 100%;
       display: flex;
       flex-direction: column;
-      animation: fadeUp 0.8s ease both;
+      animation: fadeUp 0.45s ease both;
       position: relative;
+      justify-self: stretch;
     }
 
     .faq-wrap::before {
       content: "";
       position: absolute;
       inset: 0 0 auto 0;
-      height: 120px;
-      background: linear-gradient(180deg, rgba(255, 90, 95, 0.08), transparent);
+      height: 150px;
+      background: linear-gradient(180deg, rgba(255, 90, 95, 0.10), transparent 82%);
+      opacity: 0.9;
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .faq-wrap::after {
+      content: "";
+      position: absolute;
+      right: -36px;
+      top: 8px;
+      width: 210px;
+      height: 150px;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 90, 95, 0.13), transparent 62%);
+      filter: none;
+      opacity: 0.62;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .chat-header,
@@ -535,6 +579,45 @@
       background: rgba(24, 24, 27, 0.72);
       backdrop-filter: blur(14px);
       flex-shrink: 0;
+    }
+
+    .faq-header {
+      overflow: hidden;
+    }
+
+    .faq-header::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      width: 265px;
+      height: calc(100% - 12px);
+      background:
+        radial-gradient(circle at 90% 16%, rgba(255, 90, 95, 0.34) 0 10px, transparent 11px),
+        radial-gradient(circle at 78% 30%, rgba(255, 104, 109, 0.25) 0 6px, transparent 7px),
+        radial-gradient(circle at 94% 42%, rgba(255, 132, 137, 0.26) 0 7px, transparent 8px),
+        radial-gradient(circle at 71% 50%, rgba(255, 90, 95, 0.18) 0 4px, transparent 5px),
+        radial-gradient(circle at 82% 64%, rgba(255, 150, 154, 0.18) 0 4px, transparent 5px),
+        radial-gradient(circle at 63% 28%, rgba(255, 90, 95, 0.16) 0 4px, transparent 5px),
+        radial-gradient(circle at 54% 45%, rgba(255, 120, 126, 0.15) 0 4px, transparent 5px),
+        radial-gradient(circle at 68% 74%, rgba(255, 90, 95, 0.13) 0 3px, transparent 4px),
+        radial-gradient(circle at 86% 80%, rgba(255, 165, 169, 0.15) 0 3px, transparent 4px),
+        radial-gradient(circle at 46% 72%, rgba(255, 90, 95, 0.11) 0 3px, transparent 4px),
+        radial-gradient(circle at 97% 68%, rgba(255, 90, 95, 0.13) 0 4px, transparent 5px),
+        radial-gradient(circle at 58% 16%, rgba(255, 175, 178, 0.13) 0 3px, transparent 4px),
+        radial-gradient(circle at 37% 38%, rgba(255, 90, 95, 0.10) 0 3px, transparent 4px),
+        radial-gradient(circle at 75% 88%, rgba(255, 115, 120, 0.10) 0 2px, transparent 3px),
+        radial-gradient(circle at 49% 88%, rgba(255, 140, 145, 0.09) 0 2px, transparent 3px);
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .faq-badge,
+    .faq-title,
+    .faq-sub {
+      position: relative;
+      z-index: 1;
     }
 
     .chat-header {
@@ -633,7 +716,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
     }
 
     #messages::-webkit-scrollbar,
@@ -857,49 +940,60 @@
     }
 
     .faq-list {
-      padding: 14px;
+      padding: 18px 16px 16px;
       overflow-y: auto;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 13px;
       flex: 1;
+      min-height: 0;
       position: relative;
       z-index: 1;
     }
 
     .faq-item {
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 15px;
-      background: rgba(255,255,255,0.02);
+      border: 1.35px solid rgba(255,255,255,0.085);
+      border-radius: 17px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018));
       transition:
-        border-color 0.24s ease,
-        background 0.24s ease,
-        transform 0.18s ease,
-        box-shadow 0.24s ease;
+        border-color 0.08s ease,
+        background 0.08s ease,
+        transform 0.08s ease,
+        box-shadow 0.08s ease;
       overflow: hidden;
     }
 
     .faq-item:hover {
       transform: translateY(-1px);
-      background: rgba(255,255,255,0.03);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.18);
+      border-color: rgba(255, 90, 95, 0.24);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
+      box-shadow:
+        0 10px 20px rgba(0,0,0,0.20),
+        0 0 18px rgba(255,90,95,0.055);
     }
 
     .faq-item.active {
-      border-color: var(--coral-border);
-      background: rgba(255,255,255,0.03);
-      box-shadow: 0 10px 24px rgba(255, 90, 95, 0.08);
+      border-color: rgba(255, 90, 95, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255,90,95,0.065), rgba(255,255,255,0.025));
+      box-shadow:
+        0 12px 26px rgba(255, 90, 95, 0.085),
+        inset 0 0 0 1px rgba(255,255,255,0.025);
     }
 
     .faq-trigger {
       width: 100%;
+      min-height: 56px;
       border: none;
       background: transparent;
-      padding: 14px 14px;
+      padding: 0 15px 0 18px;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       color: var(--white);
       cursor: pointer;
       text-align: left;
@@ -907,48 +1001,68 @@
     }
 
     .faq-question {
-      font-size: 13.2px;
+      flex: 1;
+      font-size: 13.45px;
       font-weight: 700;
-      line-height: 1.35;
+      line-height: 1.32;
       color: var(--white);
     }
 
     .faq-icon {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
       flex-shrink: 0;
-      background: rgba(255,255,255,0.05);
+      margin-left: auto;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.095), rgba(255,255,255,0.035));
+      border: 1px solid rgba(255,255,255,0.065);
       color: var(--muted2);
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
-      transition: transform 0.24s ease, background 0.24s ease, color 0.24s ease;
+      line-height: 0;
+      padding: 0 0 2px 0;
+      transition:
+        transform 0.08s ease,
+        background 0.08s ease,
+        color 0.08s ease,
+        border-color 0.08s ease,
+        box-shadow 0.08s ease;
     }
 
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
-      background: rgba(255, 90, 95, 0.12);
-      color: #ffb8bb;
+      background:
+        linear-gradient(135deg, rgba(255, 90, 95, 0.22), rgba(255, 90, 95, 0.09));
+      border-color: rgba(255, 90, 95, 0.30);
+      color: #ffd0d2;
+      box-shadow: 0 0 16px rgba(255, 90, 95, 0.13);
     }
 
     .faq-panel {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.34s ease, opacity 0.26s ease;
+      display: none;
+      max-height: none;
+      overflow: visible;
+      opacity: 1;
+      transition: none;
     }
 
     .faq-panel-inner {
-      padding: 0 14px 14px;
+      padding: 0 18px 22px;
       color: var(--muted2);
       font-size: 12.7px;
-      line-height: 1.6;
+      line-height: 1.68;
+      overflow: visible;
+    }
+
+    .faq-panel-inner p {
+      margin: 0;
     }
 
     .faq-item.active .faq-panel {
+      display: block;
       opacity: 1;
     }
 
@@ -991,14 +1105,15 @@
     }
 
     .faq-footer {
-      margin-top: 2px;
-      padding: 14px;
-      border: 1px dashed rgba(255,255,255,0.08);
-      border-radius: 14px;
-      background: rgba(14, 14, 16, 0.45);
+      margin-top: 1px;
+      padding: 18px 17px;
+      border: 1px dashed rgba(255,255,255,0.11);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(14, 14, 16, 0.45));
       color: var(--muted2);
-      font-size: 12.2px;
-      line-height: 1.6;
+      font-size: 12.25px;
+      line-height: 1.62;
     }
 
     .faq-footer strong {
@@ -1049,10 +1164,19 @@
     }
 
     .input-shake {
-      animation: input-shake 0.35s ease-out;
+      animation: input-shake 0.25s ease-out;
     }
 
-    @media (max-width: 1030px) {
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media (max-width: 1180px) {
       html, body {
         overflow: auto;
       }
@@ -1069,6 +1193,15 @@
 
       .support-grid {
         grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 760px;
+      }
+
+      .chat-wrap,
+      .faq-wrap {
+        width: 100%;
+        max-width: 760px;
+        justify-self: center;
       }
 
       .faq-wrap {
@@ -1137,6 +1270,8 @@
     <span class="bg-orb orb-4"></span>
     <span class="bg-orb orb-5"></span>
     <span class="bg-orb orb-6"></span>
+    <span class="bg-orb orb-7"></span>
+    <span class="bg-orb orb-8"></span>
   </div>
 
   <div id="app">
@@ -1450,24 +1585,7 @@
     }
 
     function scrollToBottom() {
-      const target = msgContainer.scrollHeight;
-      const start  = msgContainer.scrollTop;
-      const diff   = target - start;
-      const dur    = 260;
-      let startTime = null;
-
-      function step(ts) {
-        if (!startTime) startTime = ts;
-
-        const progress = Math.min((ts - startTime) / dur, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
-
-        msgContainer.scrollTop = start + diff * ease;
-
-        if (progress < 1) requestAnimationFrame(step);
-      }
-
-      requestAnimationFrame(step);
+      msgContainer.scrollTop = msgContainer.scrollHeight;
     }
 
     function parseMarkdown(text) {
@@ -1654,27 +1772,14 @@
 
     sendBtn.addEventListener('click', () => sendMessage());
 
-    /* ── FAQ SMOOTH ACCORDION ──────────────────────────────────── */
-    function setFaqHeight(item) {
-      const panel = item.querySelector('.faq-panel');
-      if (!panel) return;
-
-      if (item.classList.contains('active')) {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-      } else {
-        panel.style.maxHeight = '0px';
-      }
-    }
-
+    /* ── FAQ ACCORDION INSTANTÂNEO ───────────────────────────────── */
     document.querySelectorAll('.faq-item').forEach((item, index) => {
       const trigger = item.querySelector('.faq-trigger');
-      const panel = item.querySelector('.faq-panel');
 
       if (index === 0) {
         item.classList.add('active');
-        panel.style.maxHeight = panel.scrollHeight + 'px';
       } else {
-        panel.style.maxHeight = '0px';
+        item.classList.remove('active');
       }
 
       trigger.addEventListener('click', () => {
@@ -1682,18 +1787,12 @@
 
         document.querySelectorAll('.faq-item').forEach(other => {
           other.classList.remove('active');
-          setFaqHeight(other);
         });
 
         if (!isActive) {
           item.classList.add('active');
-          setFaqHeight(item);
         }
       });
-    });
-
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.faq-item').forEach(setFaqHeight);
     });
 
     /* ── AMBIENTE / CONTA ──────────────────────────────────────── */
