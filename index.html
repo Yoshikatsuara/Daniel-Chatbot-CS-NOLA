@@ -1259,6 +1259,66 @@
         max-width: 88%;
       }
     }
+
+
+    /* FIX DESKTOP - FAQ aberta sem cortar texto no PC */
+    @media (min-width: 1181px) {
+      .faq-list {
+        align-items: stretch;
+      }
+
+      .faq-item {
+        flex: 0 0 auto;
+      }
+
+      .faq-item.active {
+        height: auto !important;
+        min-height: 168px !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .faq-item.active .faq-trigger {
+        height: auto !important;
+        min-height: 56px !important;
+      }
+
+      .faq-item.active .faq-panel {
+        display: block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      .faq-item.active .faq-panel-inner {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding-bottom: 20px !important;
+      }
+
+      .faq-item.active .faq-panel-inner p {
+        display: block !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        white-space: normal !important;
+        -webkit-line-clamp: unset !important;
+        line-clamp: unset !important;
+      }
+
+      .faq-item.active .faq-meta {
+        display: flex !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+
   </style>
 </head>
 
